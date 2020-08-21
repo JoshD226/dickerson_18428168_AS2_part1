@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Landing Page</title>
+
+    <script src="loading.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="validate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" href="index.html">Home</a>
+                <a class="nav-item nav-link active" href="contact.html">Contact <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="cv.html">CV</a>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <div id="error"></div>
+
+    <form id="form">
+        <div class="col-md-5 mb-3">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" type="text" placeholder="example@example.com" value=""/>
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="title">Title</label>
+            <input class="form-control" id="title" type="text" placeholder="" value=""/>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="firstName">First Name</label>
+            <input class="form-control" id="firstName" type="text" placeholder="" value=""/>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="lastName">Last Name</label>
+            <input class="form-control" id="lastName" type="text" placeholder="" value=""/>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="contactNumber">Contact Number</label>
+            <input class="form-control" id="contactNumber" type="text" placeholder="" value=""/>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="4"></textarea>
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit">Send</button>
+    </form>
+
+
+    <script>
+        $('form').on('submit', (e) => {
+            e.preventDefault();
+            const fName = $('#firstName').val().trim();
+            const email = $('#email').val().trim();
+            const message = $('#message').val().trim();
+
+            const data = {
+                fName,
+                email,
+                message
+            };
+
+            $.post('/email', data, function() {
+                console.log('Ay up the server has the info');
+            });
+        });
+    </script>
+    <!--nodemon server.js to run the server localhost:8080 in browser-->
+    <div class="loading">
+        <img src="images/loading.gif" alt="Loading">
+      </div>
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p><a href="https://www.facebook.com/josh.dickerson.731">Facebook</a> <a href="https://twitter.com/joshdic37380691">Twitter </a></p>
+        </div>
+      </footer>
+</body>
+</html>
